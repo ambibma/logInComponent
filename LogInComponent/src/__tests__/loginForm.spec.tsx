@@ -21,5 +21,13 @@ describe('Login Form component', () => {
     expect(onLoginMock).not.toHaveBeenCalled();
 
   });
+  it('updates the state when typing in the username input', () => {
+    const { getByPlaceholderText } = render(<LoginForm onLogin={() => {}} />);
+    const usernameInput = getByPlaceholderText('Username');
+
+    fireEvent.change(usernameInput, { target: { value: 'testuser' } });
+    
+    expect(usernameInput).toHaveValue('testuser');
+  });
 
 });
