@@ -21,6 +21,7 @@ describe('Login Form component', () => {
     expect(onLoginMock).not.toHaveBeenCalled();
 
   });
+
   it('updates the state when typing in the username input', () => {
     const { getByPlaceholderText } = render(<LoginForm onLogin={() => {}} />);
     const usernameInput = getByPlaceholderText('Username');
@@ -32,8 +33,24 @@ describe('Login Form component', () => {
   it('updates the state when typing in the password input', () => {
     const { getByPlaceholderText } = render(<LoginForm onLogin={() => {}} />);
     const passwordInput = getByPlaceholderText('Password');
+
     fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+
     expect(passwordInput).toHaveValue('testpassword');
+  });
+
+  it('calls onLogin function when clicking the Login button with valid credentials', () => {
+    const onLoginMock = jest.fn();
+    const { getByRole, getByPlaceholderText } = render(<LoginForm onLogin={onLoginMock} />);
+    const usernameInput = getByPlaceholderText('Username');
+    const passwordInput = getByPlaceholderText('Password');
+    const loginButton = getByRole('button', {name: 'Login'});
+
+    fireEvent.change(usernameInput, { target: { value: 'testuser' } });
+    fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+    fireEvent.click(loginButton);
+
+    expect(onLoginMock).toHaveBeenCalledTimes(1);
   });
 
 });
