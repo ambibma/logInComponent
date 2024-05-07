@@ -26,8 +26,14 @@ describe('Login Form component', () => {
     const usernameInput = getByPlaceholderText('Username');
 
     fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-    
+
     expect(usernameInput).toHaveValue('testuser');
+  });
+  it('updates the state when typing in the password input', () => {
+    const { getByPlaceholderText } = render(<LoginForm onLogin={() => {}} />);
+    const passwordInput = getByPlaceholderText('Password');
+    fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+    expect(passwordInput).toHaveValue('testpassword');
   });
 
 });
