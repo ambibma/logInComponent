@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/loginForm.css' 
 
 
 interface LoginFormProps {
@@ -34,20 +35,22 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   
   return (
     <>
+    <div className='form-login'>
       <h1>Login</h1>
       <input
         type="text"
         value={state.username} 
         onChange={handleUsernameChange} 
         placeholder='Username' 
-      />
+        />
       <input 
         type="password"
         value={state.password}
         onChange={handlePasswordChange}
         placeholder='Password'
-      />
+        />
       <button onClick={handleLogin}>Login</button>
+    </div>
     </>
   )
 
